@@ -55,8 +55,6 @@
     "axios": "^1.6.2",
     "dotenv": "^16.3.1",
     "table": "^6.8.1",
-    "conf": "^12.0.0",
-    "crypto-js": "^4.2.0",
     "date-fns": "^2.30.0"
   },
   "devDependencies": {

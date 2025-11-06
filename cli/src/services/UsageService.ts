@@ -64,6 +64,7 @@ export class UsageService {
       today: today.cost,
       thisWeek,
       thisMonth,
+      totalCost: thisMonth,
       projected: (thisMonth / now.getDate()) * new Date(now.getFullYear(), now.getMonth() + 1, 0).getDate(),
       budget: config.budget.monthly,
       budgetUsed: (thisMonth / config.budget.monthly) * 100,

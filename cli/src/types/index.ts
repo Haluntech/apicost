@@ -28,6 +28,7 @@ export interface CostSummary {
   today: number;
   thisWeek: number;
   thisMonth: number;
+  totalCost: number; // alias for thisMonth
   projected: number;
   budget: number;
   budgetUsed: number; // percentage
@@ -130,6 +131,9 @@ export interface CommandOptions {
   provider?: string;
   model?: string;
   days?: number;
+  confidence?: boolean;
+  period?: string;
+  output?: string;
 }
 
 export interface InitAnswers {

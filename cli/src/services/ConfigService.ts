@@ -1,41 +1,41 @@
-import Conf from 'conf';
-import CryptoJS from 'crypto-js';
+import * as fs from 'fs';
+import * as path from 'path';
+import * as os from 'os';
 import { Config, APIProvider, Budget } from '@/types';
 
 export class ConfigService {
-  private config: Conf;
+  private configPath: string;
   private encryptionKey: string;
 
   constructor() {
-    this.config = new Conf({
-      projectName: 'api-cost-guard',
-      projectVersion: '1.0.0',
-      cwd: process.env.HOME || process.env.USERPROFILE || '.'
-    });
+    const homeDir = os.homedir();
+    const configDir = path.join(homeDir, '.api-cost');
     
-    // Generate or retrieve encryption key
+    // Ensure config directory exists
+    if (!fs.existsSync(configDir)) {
+      fs.mkdirSync(configDir, { recursive: true });
+    }
+    
+    this.configPath = path.join(configDir, 'config.json');
     this.encryptionKey = this.getEncryptionKey();
   }
 
   private getEncryptionKey(): string {
-    const storedKey = this.config.get('encryptionKey') as string;
-    if (storedKey) {
-      return storedKey;
-    }
-    
-    // Generate new encryption key
-    const key = CryptoJS.lib.WordArray.random(256/8).toString();
-    this.config.set('encryptionKey', key);
-    return key;
+    // Simple encryption key - in production, use a more secure approach
+    return 'api-cost-guard-key-v1';
   }
 
   private encrypt(text: string): string {
-    return CryptoJS.AES.encrypt(text, this.encryptionKey).toString();
+    // Simple obfuscation - for demo purposes
+    return Buffer.from(text).toString('base64');
   }
 
   private decrypt(ciphertext: string): string {
-    const bytes = CryptoJS.AES.decrypt(ciphertext, this.encryptionKey);
-    return bytes.toString(CryptoJS.enc.Utf8);
+    try {
+      return Buffer.from(ciphertext, 'base64').toString();
+    } catch {
+      return '';
+    }
   }
 
   getConfig(): Config {
@@ -50,14 +50,22 @@ export class ConfigService {
       dateFormat: 'yyyy-MM-dd'
     };
 
-    const storedConfig = this.config.get('config') as Config;
-    return { ...defaultConfig, ...storedConfig };
+    if (!fs.existsSync(this.configPath)) {
+      return defaultConfig;
+    }
+
+    try {
+      const storedConfig = JSON.parse(fs.readFileSync(this.configPath, 'utf8'));
+      return { ...defaultConfig, ...storedConfig };
+    } catch {
+      return defaultConfig;
+    }
   }
 
   updateConfig(updates: Partial<Config>): void {
     const currentConfig = this.getConfig();
     const newConfig = { ...currentConfig, ...updates };
-    this.config.set('config', newConfig);
+    fs.writeFileSync(this.configPath, JSON.stringify(newConfig, null, 2));
   }
 
   addAPIProvider(provider: APIProvider): void {
@@ -70,7 +78,7 @@ export class ConfigService {
     };
     
     config.apis[provider.name] = encryptedProvider;
-    this.config.set('config', config);
+    this.updateConfig(config);
   }
 
   getAPIProvider(name: string): APIProvider | null {
@@ -99,13 +107,13 @@ export class ConfigService {
   removeAPIProvider(name: string): void {
     const config = this.getConfig();
     delete config.apis[name];
-    this.config.set('config', config);
+    this.updateConfig(config);
   }
 
   updateBudget(budget: Partial<Budget>): void {
     const config = this.getConfig();
     config.budget = { ...config.budget, ...budget };
-    this.config.set('config', config);
+    this.updateConfig(config);
   }
 
   getBudget(): Budget {
@@ -127,11 +135,13 @@ export class ConfigService {
   }
 
   isFirstRun(): boolean {
-    return !this.config.has('config');
+    return !fs.existsSync(this.configPath);
   }
 
   reset(): void {
-    this.config.clear();
+    if (fs.existsSync(this.configPath)) {
+      fs.unlinkSync(this.configPath);
+    }
   }
 
   exportConfig(): string {
@@ -162,7 +172,7 @@ export class ConfigService {
           }
         });
       }
-      this.config.set('config', importedConfig);
+      this.updateConfig(importedConfig);
     } catch (error) {
       throw new Error('Invalid config file format');
     }

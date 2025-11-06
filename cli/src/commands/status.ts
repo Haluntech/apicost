@@ -94,10 +94,6 @@ export async function statusCommand(options: CommandOptions) {
       });
 
       console.log(table(modelData, {
-        header: {
-          alignment: 'center',
-          content: chalk.bold
-        },
         border: {
           topBody: '─',
           topJoin: '┬',
@@ -132,10 +128,6 @@ export async function statusCommand(options: CommandOptions) {
       });
 
       console.log(table(trendData, {
-        header: {
-          alignment: 'center',
-          content: chalk.bold
-        },
         border: {
           topBody: '─',
           topJoin: '┬',
@@ -177,11 +169,12 @@ export async function statusCommand(options: CommandOptions) {
     }
 
   } catch (error) {
-    console.error(chalk.red('❌ Error fetching usage data:'), error);
+    const errorMessage = error instanceof Error ? error.message : 'Unknown error';
+    console.error(chalk.red('❌ Error fetching usage data:'), errorMessage);
     
-    if (error.message.includes('API key')) {
+    if (errorMessage.includes('API key')) {
       console.log(chalk.yellow('\n💡 Tip: Make sure your API keys are correctly configured with "api-cost init"'));
-    } else if (error.message.includes('network')) {
+    } else if (errorMessage.includes('network')) {
       console.log(chalk.yellow('\n💡 Tip: Check your internet connection and try again'));
     }
     

@@ -70,10 +70,6 @@ export async function suggestCommand(options: CommandOptions) {
     });
 
     console.log(table(tableData, {
-      header: {
-        alignment: 'center',
-        content: chalk.bold
-      },
       border: {
         topBody: '─',
         topJoin: '┬',

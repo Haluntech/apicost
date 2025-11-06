@@ -43,10 +43,6 @@ export async function historyCommand(options: CommandOptions) {
     });
 
     console.log(table(tableData, {
-      header: {
-        alignment: 'center',
-        content: chalk.bold
-      },
       border: {
         topBody: '─',
         topJoin: '┬',
