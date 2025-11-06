@@ -1,7 +1,7 @@
 import * as fs from 'fs';
 import * as path from 'path';
 import * as os from 'os';
-import { Config, APIProvider, Budget } from '@/types';
+import { Config, APIProvider, Budget } from '../types';
 
 export class ConfigService {
   private configPath: string;

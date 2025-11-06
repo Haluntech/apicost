@@ -2,15 +2,15 @@
 
 import { Command } from 'commander';
 import chalk from 'chalk';
-import { initCommand } from '@/commands/init';
-import { statusCommand } from '@/commands/status';
-import { predictCommand } from '@/commands/predict';
-import { suggestCommand } from '@/commands/suggest';
-import { historyCommand } from '@/commands/history';
-import { budgetCommand } from '@/commands/budget';
-import { alertCommand } from '@/commands/alert';
-import { reportCommand } from '@/commands/report';
-import { ConfigService } from '@/services/ConfigService';
+import { initCommand } from './commands/init';
+import { statusCommand } from './commands/status';
+import { predictCommand } from './commands/predict';
+import { suggestCommand } from './commands/suggest';
+import { historyCommand } from './commands/history';
+import { budgetCommand } from './commands/budget';
+import { alertCommand } from './commands/alert';
+import { reportCommand } from './commands/report';
+import { ConfigService } from './services/ConfigService';
 
 const program = new Command();
 

@@ -1,5 +1,5 @@
 import chalk from 'chalk';
-import { ConfigService } from '@/services/ConfigService';
+import { ConfigService } from '../services/ConfigService';
 
 export async function alertCommand(action: string) {
   const configService = new ConfigService();

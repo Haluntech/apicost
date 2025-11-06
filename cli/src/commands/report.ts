@@ -1,10 +1,10 @@
 import chalk from 'chalk';
 import fs from 'fs';
 import path from 'path';
-import { ConfigService } from '@/services/ConfigService';
-import { UsageService } from '@/services/UsageService';
-import { formatCurrency, formatDate } from '@/utils/format';
-import { CommandOptions } from '@/types';
+import { ConfigService } from '../services/ConfigService';
+import { UsageService } from '../services/UsageService';
+import { formatCurrency, formatDate } from '../utils/format';
+import { CommandOptions } from '../types';
 
 export async function reportCommand(options: CommandOptions) {
   const configService = new ConfigService();

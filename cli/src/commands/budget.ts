@@ -1,6 +1,6 @@
 import chalk from 'chalk';
-import { ConfigService } from '@/services/ConfigService';
-import { formatCurrency } from '@/utils/format';
+import { ConfigService } from '../services/ConfigService';
+import { formatCurrency } from '../utils/format';
 
 export async function budgetCommand(action: string, value?: string) {
   const configService = new ConfigService();

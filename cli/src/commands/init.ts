@@ -1,7 +1,7 @@
 import inquirer from 'inquirer';
 import chalk from 'chalk';
-import { ConfigService } from '@/services/ConfigService';
-import { InitAnswers } from '@/types';
+import { ConfigService } from '../services/ConfigService';
+import { InitAnswers } from '../types';
 
 export async function initCommand(options: { force?: boolean }) {
   const configService = new ConfigService();

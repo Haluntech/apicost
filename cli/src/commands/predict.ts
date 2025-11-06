@@ -1,8 +1,8 @@
 import chalk from 'chalk';
-import { ConfigService } from '@/services/ConfigService';
-import { UsageService } from '@/services/UsageService';
-import { formatCurrency } from '@/utils/format';
-import { CommandOptions } from '@/types';
+import { ConfigService } from '../services/ConfigService';
+import { UsageService } from '../services/UsageService';
+import { formatCurrency } from '../utils/format';
+import { CommandOptions } from '../types';
 
 export async function predictCommand(options: CommandOptions) {
   const configService = new ConfigService();

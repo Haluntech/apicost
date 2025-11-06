@@ -1,6 +1,6 @@
-import { CostSummary, UsageData, ModelUsage, DailyUsage } from '@/types';
+import { CostSummary, UsageData, ModelUsage, DailyUsage } from '../types';
 import { ConfigService } from './ConfigService';
-import { PRICING_DATA } from '@/types';
+import { PRICING_DATA } from '../types';
 
 export class UsageService {
   private configService: ConfigService;

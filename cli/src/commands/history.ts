@@ -1,9 +1,9 @@
 import chalk from 'chalk';
 import { table } from 'table';
-import { ConfigService } from '@/services/ConfigService';
-import { UsageService } from '@/services/UsageService';
-import { formatCurrency, formatDate, formatNumber } from '@/utils/format';
-import { CommandOptions } from '@/types';
+import { ConfigService } from '../services/ConfigService';
+import { UsageService } from '../services/UsageService';
+import { formatCurrency, formatDate, formatNumber } from '../utils/format';
+import { CommandOptions } from '../types';
 
 export async function historyCommand(options: CommandOptions) {
   const configService = new ConfigService();
