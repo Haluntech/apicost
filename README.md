@@ -1,341 +1,371 @@
-# <p align="center">🦾 API Cost Guard</p>
+# 🦾 API Cost Guard
 
 <div align="center">
 
-**AI API Cost Monitoring & Optimization Tool**
-
 [![npm version](https://badge.fury.io/js/api-cost-guard.svg)](https://badge.fury.io/js/api-cost-guard)
+[![VS Code Marketplace](https://vsmarketplacebadges.vercel.app/version/haluntech.api-cost-guard.svg)](https://marketplace.visualstudio.com/items?itemName=haluntech.api-cost-guard)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-[![TypeScript](https://img.shields.io/badge/TypeScript-007ACC?logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
-[![Node.js](https://img.shields.io/badge/Node.js-16%2B-green.svg)](https://nodejs.org/)
+[![TypeScript](https://img.shields.io/badge/TypeScript-007ACC?logo=typescript&logoColor=white)](https://www.typescript-lang.org/)
 
-*A CLI-first tool that helps developers monitor, predict, and optimize AI API costs without breaking their workflow.*
+**Real-time AI API cost monitoring and optimization for developers**
+
+Stop surprise API bills! Monitor your OpenAI, Claude, and Google AI costs in real-time while you code.
+
+[Install CLI](#installation) • [VS Code Extension](#vs-code-extension) • [Documentation](#documentation) • [Quick Start](#quick-start)
 
 </div>
 
----
+## ✨ Features
 
-## ✨ 为什么选择 API Cost Guard？
+### 🖥️ **Terminal Monitoring**
+- Real-time cost tracking with customizable intervals
+- Intelligent alerts when approaching budget limits
+- Color-coded progress bars and notifications
+- Continuous monitoring during coding sessions
 
-🚀 **CLI优先设计** - 在终端内快速查看成本，不中断开发流程  
-💰 **智能成本优化** - 平均可节省30-50%的AI API费用  
-🎯 **多平台支持** - OpenAI、Claude、Google AI一站式管理  
-📊 **实时监控** - 即时了解API使用情况和成本趋势  
-🔒 **安全可靠** - API密钥本地加密存储，数据不出设备  
+### 💻 **VS Code Integration**
+- Status bar cost display with live updates
+- One-click monitoring start/stop
+- Budget usage indicators (🟢🟡🔴)
+- Automatic detection of AI package installations
 
-## ⚡ 5分钟快速开始
+### 📊 **Comprehensive Analytics**
+- Multi-provider support (OpenAI, Claude, Google AI)
+- Usage history and trend analysis
+- Cost predictions and forecasting
+- Optimization suggestions
 
-### 安装
+### 🔒 **Privacy-First**
+- Local data storage with encryption
+- No cloud dependencies
+- Secure API key management
+- Offline functionality
+
+## 🚀 Quick Start
+
+### Installation
+
+```bash
+# Install CLI tool globally
+npm install -g api-cost-guard
+
+# Initialize configuration
+api-cost init
+
+# Set your monthly budget
+api-cost budget set 100
+```
+
+### Basic Usage
+
+```bash
+# Check current status
+api-cost status
+
+# Start real-time monitoring
+api-cost monitor
+
+# Get cost predictions
+api-cost predict
+
+# View optimization suggestions
+api-cost suggest
+```
+
+## 📦 Installation
+
+### CLI Tool
 
 ```bash
 npm install -g api-cost-guard
 ```
 
-### 初始化配置
+### VS Code Extension
+
+1. **From Marketplace** (recommended):
+   - Search "API Cost Guard" in VS Code extensions
+   - Click **Install**
+
+2. **From .vsix file**:
+   ```bash
+   code --install-extension api-cost-guard-0.2.0.vsix
+   ```
+
+## 🎯 Core Use Cases
+
+### 1. **Development Time Monitoring**
+```bash
+# Start monitoring when you begin coding
+api-cost monitor
+
+# Monitor every 5 minutes for 2 hours
+api-cost monitor -i 5 -d 120
+```
+
+### 2. **Budget Management**
+```bash
+# Set monthly budget
+api-cost budget set 200
+
+# Configure alert threshold
+api-cost budget threshold 80
+
+# Check budget status
+api-cost budget show
+```
+
+### 3. **Cost Analysis**
+```bash
+# 7-day usage history
+api-cost history -d 7
+
+# Generate monthly report
+api-cost report -p month -f markdown
+
+# Export data for analysis
+api-cost history --format csv -o costs.csv
+```
+
+## 📊 Supported Providers
+
+| Provider | Models | Features |
+|----------|---------|----------|
+| **OpenAI** | GPT-4, GPT-3.5, DALL-E | ✅ Usage tracking, ✅ Cost calculation |
+| **Claude** | Claude-3, Claude-2 | ✅ Usage tracking, ✅ Cost calculation |
+| **Google AI** | Gemini Pro, Gemini Vision | ✅ Usage tracking, ✅ Cost calculation |
+
+## 🎨 Visualization Options
+
+### Terminal Monitoring
+<div align="center">
 
 ```bash
+🔍 Starting API Cost Monitor
+
+[14:32] 💡 Status: $12.34 / $100 (12.3%) | ██████░░░░░░░░░░░░░░░░░░░
+[14:37] ⚠️ Budget Alert: 85.0% of budget used
+        💰 Current: $85.00 | Budget: $100 | █████████████████░░░░░░
+```
+
+</div>
+
+### VS Code Status Bar
+- **$12.34** 🟢 Normal usage (<70% budget)
+- **$85.00** 🟡 Warning (70-90% budget)  
+- **$105.00** 🔴 Over budget (>90% budget)
+
+### Progress Indicators
+```
+Budget Usage: ███████████████████████ 100%
+```
+
+## 📈 Commands Reference
+
+### Core Commands
+```bash
+api-cost status          # Show current usage status
+api-cost monitor         # Start real-time monitoring
+api-cost predict         # Predict monthly costs
+api-cost suggest         # Get optimization suggestions
+api-cost history         # Show usage history
+```
+
+### Budget Management
+```bash
+api-cost budget set 200    # Set $200 monthly budget
+api-cost budget show       # Show current budget
+api-cost budget threshold 80  # Set 80% alert threshold
+```
+
+### Reporting
+```bash
+api-cost report -f markdown    # Generate markdown report
+api-cost report -p week        # Weekly report
+api-cost report -o report.md   # Save to file
+```
+
+### Configuration
+```bash
+api-cost init               # Initialize configuration
+api-cost test               # Test API connections
+api-cost init --force       # Reset configuration
+```
+
+## ⚙️ Configuration
+
+### API Setup
+```bash
+# Interactive setup
 api-cost init
+
+# Or edit configuration directly
+~/.api-cost/config.json
 ```
 
-### 查看成本状态
+### Configuration Structure
+```json
+{
+  "providers": {
+    "openai": { "apiKey": "sk-...", "models": ["gpt-4", "gpt-3.5-turbo"] },
+    "claude": { "apiKey": "sk-ant-...", "models": ["claude-3-opus"] },
+    "google": { "apiKey": "AIza...", "models": ["gemini-pro"] }
+  },
+  "budget": { "monthly": 100, "threshold": 80 },
+  "alerts": { "enabled": true }
+}
+```
 
+## 🔧 Advanced Features
+
+### Real-time Monitoring
 ```bash
-api-cost status
+# Custom intervals (minutes)
+api-cost monitor -i 10
+
+# Duration limits (minutes)
+api-cost monitor -d 60
+
+# Continuous monitoring
+api-cost monitor
 ```
 
-### 获取优化建议
-
+### Data Export
 ```bash
-api-cost suggest
+# CSV export
+api-cost history --format csv -o usage.csv
+
+# JSON export
+api-cost history --format json -o usage.json
+
+# Markdown report
+api-cost report -f markdown -o report.md
 ```
 
-## 📊 使用示例
-
+### Alert Customization
 ```bash
-# 查看当前API使用状态
-$ api-cost status
-📊 API Cost Status
+# Configure alert thresholds
+api-cost budget threshold 70  # Warning at 70%
+api-cost budget threshold 90  # Critical at 90%
 
-Overview:
-┌──────────────┬─────────────────┐
-│ Today        │           $12.34│
-│ This Week    │           $56.78│
-│ This Month   │          $124.56│
-│ Projected    │          $234.56│
-│ Budget       │ $200.00 (62.3%)│
-└──────────────┴─────────────────┘
-
-Budget Status:
-✅ On track - 62.3% of budget used
-
-Top Models:
-┌─────────────────┬────────┬────────┬──────────┐
-│ Model           │ Usage  │ Cost    │ %        │
-├─────────────────┼────────┼────────┼──────────┤
-│ gpt-4           │ 45     │ $74.74  │ 60.0%    │
-│ gpt-3.5-turbo   │ 120    │ $37.37  │ 30.0%    │
-│ text-embedding  │ 200    │ $12.46  │ 10.0%    │
-└─────────────────┴────────┴────────┴──────────┘
+# Toggle alerts
+api-cost alert on
+api-cost alert off
 ```
 
+## 🛠️ Development
+
+### Project Structure
+```
+api-cost-guard/
+├── cli/                    # CLI tool source code
+│   ├── src/
+│   │   ├── commands/      # CLI commands
+│   │   ├── services/      # Core services
+│   │   └── utils/         # Utilities
+│   └── package.json
+├── vscode-extension/       # VS Code extension
+│   ├── src/
+│   │   └── extension.ts   # Extension logic
+│   └── package.json
+└── docs/                  # Documentation
+```
+
+### Building from Source
 ```bash
-# 获取成本优化建议
-$ api-cost suggest
-💡 Cost Optimization Suggestions
+# Clone repository
+git clone https://github.com/Haluntech/apicost.git
 
-┌─────────────────────────────────────┬──────────┬────────┬─────────────────────────┐
-│ Suggestion                         │ Savings  │ Effort │ Implementation          │
-├─────────────────────────────────────┼──────────┼────────┼─────────────────────────┤
-│ Switch to GPT-3.5-turbo for simple │ $45/mo   │ Low    │ Update your code to use  │
-│ tasks                              │          │        │ gpt-3.5-turbo for non-   │
-│                                    │          │        │ complex tasks...         │
-├─────────────────────────────────────┼──────────┼────────┼─────────────────────────┤
-│ Enable prompt caching               │ $23/mo   │ Medium │ Implement a simple     │
-│                                    │          │        │ caching layer...        │
-└─────────────────────────────────────┴──────────┴────────┴─────────────────────────┘
+# Install CLI dependencies
+cd cli && npm install
+npm run build
 
-💰 Total potential savings: $68/month
+# Install VS Code extension dependencies
+cd ../vscode-extension
+npm install
+npm run compile
 ```
 
-## 🛠️ 支持的AI提供商
+### Contributing
+1. Fork the repository
+2. Create feature branch (`git checkout -b feature/amazing-feature`)
+3. Commit changes (`git commit -m 'Add amazing feature'`)
+4. Push to branch (`git push origin feature/amazing-feature`)
+5. Open a Pull Request
 
-| 提供商 | 支持状态 | 支持模型 |
-|--------|----------|----------|
-| ![OpenAI](https://img.shields.io/badge/OpenAI-412991?style=flat&logo=openai) | ✅ 完全支持 | GPT-4, GPT-3.5-turbo, DALL-E, Embeddings |
-| ![Anthropic](https://img.shields.io/badge/Anthropic-D735DF?style=flat&logo=anthropic) | ✅ 完全支持 | Claude-3, Claude-2 |
-| ![Google](https://img.shields.io/badge/Google-4285F4?style=flat&logo=google) | ✅ 完全支持 | Gemini Pro |
+## 🐛 Troubleshooting
 
-## 📋 完整命令列表
+### Common Issues
 
+**API Key Not Working**
 ```bash
-# 🚀 初始化配置
-api-cost init                          # 交互式配置向导
+# Test API connections
+api-cost test
 
-# 📊 监控和状态
-api-cost status                        # 当前使用状态
-api-cost history --days 30              # 历史使用记录
-api-cost predict                       # 月度成本预测
-
-# 💡 优化建议
-api-cost suggest                       # 获取优化建议
-api-cost suggest --type model-switch    # 按类型筛选建议
-
-# 💰 预算管理
-api-cost budget set 200                # 设置月度预算
-api-cost budget show                   # 查看当前预算
-api-cost budget threshold 80           # 设置警报阈值
-
-# 🔔 警报管理
-api-cost alert on                      # 开启警报
-api-cost alert off                     # 关闭警报
-api-cost alert status                  # 查看警报状态
-
-# 📝 报告生成
-api-cost report --format markdown      # 生成Markdown报告
-api-cost report --format json          # 生成JSON报告
-api-cost report --output report.pdf    # 输出到文件
-
-# 🔧 工具命令
-api-cost --help                        # 查看帮助
-api-cost --version                     # 查看版本
+# Reconfigure keys
+api-cost init --force
 ```
 
-## 🎯 使用场景
-
-### 👨‍💻 个人开发者
+**Tool Not Found**
 ```bash
-# 日常成本检查
-api-cost status
+# Verify installation
+which api-cost
 
-# 设置预算警报
-api-cost budget set 100 && api-cost alert on
-
-# 优化API使用
-api-cost suggest
-```
-
-### 👥 小团队协作
-```bash
-# 生成团队报告
-api-cost report --format csv --output team-costs.csv
-
-# 分析团队使用模式
-api-cost history --days 90 --format json > analysis.json
-```
-
-### 🏢 产品管理
-```bash
-# 月度成本分析
-api-cost report --format markdown --output monthly-report.md
-
-# 预算规划
-api-cost predict --confidence
-```
-
-## 📈 成本优化效果
-
-使用 API Cost Guard 的典型用户平均节省：
-
-| 优化策略 | 平均节省 | 实施难度 |
-|----------|----------|----------|
-| 模型切换 | 45% | 低 |
-| 提示缓存 | 23% | 中 |
-| 批量处理 | 15% | 低 |
-| 使用限制 | 30% | 中 |
-| **总计** | **68%** | - |
-
-## 🔧 技术架构
-
-```
-┌─────────────────┐    ┌─────────────────┐
-│   CLI Interface │ ←  │  Command Layer  │
-│  (Commander.js) │    │   (Commands/)   │
-└─────────────────┘    └─────────────────┘
-         ↓                       ↓
-┌─────────────────┐    ┌─────────────────┐
-│  Service Layer  │ ←  │   Data Layer    │
-│  (Services/)    │    │  (Files/Config) │
-└─────────────────┘    └─────────────────┘
-```
-
-- **语言**: TypeScript
-- **运行时**: Node.js 16+
-- **架构**: 模块化CLI工具
-- **存储**: 本地JSON配置文件
-- **安全**: API密钥加密存储
-
-## 🚀 安装指南
-
-### 系统要求
-- Node.js >= 16.0.0
-- npm >= 8.0.0
-- 支持 Windows、macOS、Linux
-
-### 安装方式
-
-```bash
-# 全局安装 (推荐)
+# Reinstall globally
 npm install -g api-cost-guard
-
-# 验证安装
-api-cost --version
-
-# 查看帮助
-api-cost --help
 ```
 
-### 配置API密钥
+**VS Code Extension Not Working**
+1. Check VS Code developer console for errors
+2. Ensure CLI tool is installed and accessible
+3. Restart VS Code
 
+**No Data Showing**
 ```bash
-# 启动配置向导
-api-cost init
+# Check configuration
+api-cost status --verbose
 
-# 手动添加OpenAI密钥
-export OPENAI_API_KEY="sk-your-key-here"
-
-# 手动添加Claude密钥  
-export ANTHROPIC_API_KEY="sk-ant-your-key-here"
+# Verify API keys are valid
+api-cost test
 ```
 
-## 📚 文档链接
+### Debug Mode
+```bash
+# Enable verbose output
+api-cost status --verbose
 
-| 文档类型 | 链接 | 描述 |
-|----------|------|------|
-| 📖 [使用指南](docs/USAGE_GUIDE.md) | 详细使用说明 | 完整的功能介绍和最佳实践 |
-| ⚡ [快速开始](QUICK_START.md) | 5分钟上手 | 最简单的入门教程 |
-| 🔧 [开发文档](docs/DEVELOPMENT.md) | 开发者指南 | 贡献代码和扩展功能 |
-| 📋 [更新日志](CHANGELOG.md) | 版本历史 | 每个版本的详细更新 |
+# View logs
+tail -f ~/.api-cost/logs/api-cost.log
+```
 
-## 🤝 贡献指南
+## 📚 Documentation
 
-我们欢迎所有形式的贡献！
+- [📖 Full Documentation](./VISUALIZATION_OPTIONS.md)
+- [🎨 Visualization Guide](./VISUALIZATION_OPTIONS.md)
+- [🔧 Configuration Guide](./docs/configuration.md)
+- [📊 API Reference](./docs/api.md)
 
-### 快速贡献
-1. Fork 本仓库
-2. 创建功能分支 (`git checkout -b feature/amazing-feature`)
-3. 提交更改 (`git commit -m 'Add amazing feature'`)
-4. 推送到分支 (`git push origin feature/amazing-feature`)
-5. 创建 Pull Request
+## 🤝 Community
 
-### 贡献类型
-- 🐛 Bug修复
-- ✨ 新功能开发
-- 📝 文档改进
-- 🎨 UI/UX优化
-- 🔧 工具和脚本
+- 🐛 [Bug Reports](https://github.com/Haluntech/apicost/issues)
+- 💡 [Feature Requests](https://github.com/Haluntech/apicost/discussions)
+- 📧 [Email Support](mailto:support@apicostguard.com)
 
-详细指南请查看 [CONTRIBUTING.md](CONTRIBUTING.md)
+## 📄 License
 
-## 🐛 问题反馈
+This project is licensed under the MIT License - see the [LICENSE](./LICENSE) file for details.
 
-遇到问题？我们很乐意帮助！
+## 🙏 Acknowledgments
 
-- [🐛 报告Bug](https://github.com/Haluntech/apicost/issues/new?template=bug_report)
-- [💡 功能建议](https://github.com/Haluntech/apicost/issues/new?template=feature_request)
-- [💬 一般讨论](https://github.com/Haluntech/apicost/discussions)
-- [📧 邮件支持](mailto:support@apicost-guard.com)
-
-## 🌟 用户案例
-
-> "API Cost Guard 帮我们的团队每月节省了40%的AI API费用，特别是在模型选择和缓存优化方面。"  
-> **张工** - AI创业公司技术负责人
-
-> "作为一个独立开发者，这个工具让我能够精确控制AI开发成本，避免意外的账单。"  
-> **李明** - 全栈开发者
-
-> "CLI优先的设计太棒了！我可以在开发过程中随时查看成本，不需要切换应用。"  
-> **王芳** - 产品经理
-
-## 🛡️ 安全和隐私
-
-- 🔒 API密钥本地加密存储
-- 🚫 不收集任何个人数据
-- 🔐 配置文件仅存储在用户设备
-- 🌍 无需网络连接即可使用大部分功能
-
-## 📊 项目统计
-
-- 📦 **npm下载量**: 0+ (刚刚发布！)
-- ⭐ **GitHub Stars**: 成为第一个Star！
-- 🐛 **已解决Issues**: 0
-- 🤝 **贡献者**: 欢迎加入！
-
-## 🗺️ 路线图
-
-### v0.1.0 (当前版本)
-- ✅ 基础CLI功能
-- ✅ 多平台API支持
-- ✅ 成本监控和预测
-- ✅ 优化建议系统
-
-### v0.2.0 (计划中)
-- 🔄 Web仪表板
-- 📈 高级数据分析
-- 👥 团队协作功能
-- 🔔 实时警报通知
-
-### v1.0.0 (未来版本)
-- 🏢 企业级功能
-- 📊 完整API
-- 🔌 第三方集成
-- ☁️ 云端同步
-
-## 📄 许可证
-
-本项目采用 [MIT 许可证](LICENSE)。
+- [Commander.js](https://github.com/tj/commander.js) - CLI framework
+- [Chalk](https://github.com/chalk/chalk) - Terminal styling
+- [VS Code API](https://code.visualstudio.com/api) - Extension development
 
 ---
 
 <div align="center">
 
-## 🎉 立即开始控制你的AI API成本！
+**Stop surprise bills. Start coding smarter.** 💰🚀
 
-```bash
-npm install -g api-cost-guard && api-cost init
-```
-
-[📖 查看文档](docs/USAGE_GUIDE.md) • [🐛 报告问题](https://github.com/Haluntech/apicost/issues) • [⭐ 给个Star](https://github.com/Haluntech/apicost)
-
-Made with ❤️ by [Claude Code](https://claude.ai/code)
+[GitHub](https://github.com/Haluntech/apicost) • [NPM](https://www.npmjs.com/package/api-cost-guard) • [VS Code Marketplace](https://marketplace.visualstudio.com/items?itemName=haluntech.api-cost-guard)
 
 </div>

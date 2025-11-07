@@ -1,8 +1,9 @@
 {
   "name": "api-cost-guard",
   "displayName": "API Cost Guard",
-  "description": "Real-time AI API cost monitoring and optimization",
-  "version": "0.1.0",
+  "description": "Real-time AI API cost monitoring and optimization for developers",
+  "version": "0.2.0",
+  "publisher": "haluntech",
   "engines": {
     "vscode": "^1.85.0"
   },
@@ -10,6 +11,23 @@
     "Other",
     "Machine Learning"
   ],
+  "keywords": [
+    "ai",
+    "api",
+    "cost",
+    "monitoring",
+    "openai",
+    "claude",
+    "gemini",
+    "budget",
+    "optimization"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Haluntech/apicost.git"
+  },
+  "license": "MIT",
+  "icon": "icon.png",
   "activationEvents": [
     "onStartup:finished"
   ],
@@ -72,6 +90,7 @@
   "devDependencies": {
     "@types/node": "20.x",
     "@types/vscode": "^1.85.0",
+    "@vscode/vsce": "^3.6.2",
     "typescript": "^5.3.3"
   },
   "dependencies": {
