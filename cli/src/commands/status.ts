@@ -13,7 +13,8 @@ export async function statusCommand(options: CommandOptions) {
     const config = configService.getConfig();
     const budget = config.budget;
     
-    console.log(chalk.cyan('📊 API Cost Status\n'));
+    console.log(chalk.cyan('📊 API Cost Status'));
+    console.log(chalk.blue('📌 Demo Mode - Showing sample data for Google AI\n'));
 
     // Get usage data
     const usage = await usageService.getCurrentUsage(options.provider, options.days);
@@ -21,6 +22,8 @@ export async function statusCommand(options: CommandOptions) {
     if (!usage || usage.totalCost === 0) {
       console.log(chalk.yellow('No usage data found.'));
       console.log(chalk.gray('Make sure your API keys are configured and you\'ve made some API calls.'));
+      console.log(chalk.blue('\n💡 Note: This is a demo version showing sample data.'));
+      console.log(chalk.blue('Real API integration will be available in v0.2.0.'));
       return;
     }
 

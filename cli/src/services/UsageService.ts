@@ -19,7 +19,25 @@ export class UsageService {
     const config = this.configService.getConfig();
     const now = new Date();
     
-    // Generate mock daily data
+    // Get provider-specific models
+    const providerInfo = provider ? config.apis[provider] : null;
+    
+    // If no provider is configured or selected, return zero usage
+    if (!providerInfo) {
+      return {
+        today: 0,
+        thisWeek: 0,
+        thisMonth: 0,
+        totalCost: 0,
+        projected: 0,
+        budget: config.budget.monthly,
+        budgetUsed: 0,
+        topModels: [],
+        dailyTrend: []
+      };
+    }
+    
+    // Generate mock daily data based on provider
     const dailyTrend: DailyUsage[] = [];
     for (let i = days - 1; i >= 0; i--) {
       const date = new Date(now);
@@ -27,9 +45,9 @@ export class UsageService {
       
       dailyTrend.push({
         date: date.toISOString().split('T')[0],
-        cost: Math.random() * 15 + 5, // $5-20 per day
-        tokens: Math.floor(Math.random() * 50000) + 10000,
-        requests: Math.floor(Math.random() * 100) + 20
+        cost: Math.random() * 10 + 2, // $2-12 per day (lower for demo)
+        tokens: Math.floor(Math.random() * 30000) + 5000,
+        requests: Math.floor(Math.random() * 50) + 10
       });
     }
 
@@ -38,27 +56,67 @@ export class UsageService {
     const thisWeek = dailyTrend.slice(-7).reduce((sum, day) => sum + day.cost, 0);
     const thisMonth = dailyTrend.reduce((sum, day) => sum + day.cost, 0);
 
-    // Generate mock model usage
-    const topModels: ModelUsage[] = [
-      {
-        model: 'gpt-4',
-        usage: 45,
-        cost: thisMonth * 0.6,
-        percentage: 60
-      },
-      {
-        model: 'gpt-3.5-turbo',
-        usage: 120,
-        cost: thisMonth * 0.3,
-        percentage: 30
-      },
-      {
-        model: 'text-embedding-ada-002',
-        usage: 200,
-        cost: thisMonth * 0.1,
-        percentage: 10
-      }
-    ];
+    // Generate provider-specific model usage
+    let topModels: ModelUsage[] = [];
+    
+    switch (provider) {
+      case 'google':
+        topModels = [
+          {
+            model: 'gemini-pro',
+            usage: 30,
+            cost: thisMonth * 0.7,
+            percentage: 70
+          },
+          {
+            model: 'gemini-pro-vision',
+            usage: 15,
+            cost: thisMonth * 0.3,
+            percentage: 30
+          }
+        ];
+        break;
+      case 'openai':
+        topModels = [
+          {
+            model: 'gpt-4',
+            usage: 45,
+            cost: thisMonth * 0.6,
+            percentage: 60
+          },
+          {
+            model: 'gpt-3.5-turbo',
+            usage: 120,
+            cost: thisMonth * 0.3,
+            percentage: 30
+          },
+          {
+            model: 'text-embedding-ada-002',
+            usage: 200,
+            cost: thisMonth * 0.1,
+            percentage: 10
+          }
+        ];
+        break;
+      case 'claude':
+        topModels = [
+          {
+            model: 'claude-3-sonnet',
+            usage: 25,
+            cost: thisMonth * 0.8,
+            percentage: 80
+          },
+          {
+            model: 'claude-3-haiku',
+            usage: 80,
+            cost: thisMonth * 0.2,
+            percentage: 20
+          }
+        ];
+        break;
+      default:
+        topModels = [];
+    }
 
     return {
       today: today.cost,
