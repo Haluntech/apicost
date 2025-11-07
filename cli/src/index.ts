@@ -10,6 +10,7 @@ import { historyCommand } from './commands/history';
 import { budgetCommand } from './commands/budget';
 import { alertCommand } from './commands/alert';
 import { reportCommand } from './commands/report';
+import { testCommand } from './commands/test';
 import { ConfigService } from './services/ConfigService';
 
 const program = new Command();
@@ -113,6 +114,12 @@ program
   .option('-o, --output <file>', 'output file path')
   .option('-p, --period <period>', 'report period (day, week, month)', 'month')
   .action(reportCommand);
+
+program
+  .command('test')
+  .description('Test API key connections')
+  .option('-p, --provider <provider>', 'test specific provider only')
+  .action(testCommand);
 
 // Global error handler
 process.on('uncaughtException', (error) => {

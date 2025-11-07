@@ -1,6 +1,6 @@
 {
   "name": "api-cost-guard",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "AI API cost monitoring and optimization tool",
   "main": "dist/index.js",
   "bin": {

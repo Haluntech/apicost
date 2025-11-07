@@ -14,7 +14,6 @@ export async function statusCommand(options: CommandOptions) {
     const budget = config.budget;
     
     console.log(chalk.cyan('📊 API Cost Status'));
-    console.log(chalk.blue('📌 Demo Mode - Showing sample data for Google AI\n'));
 
     // Get usage data
     const usage = await usageService.getCurrentUsage(options.provider, options.days);
@@ -22,8 +21,16 @@ export async function statusCommand(options: CommandOptions) {
     if (!usage || usage.totalCost === 0) {
       console.log(chalk.yellow('No usage data found.'));
       console.log(chalk.gray('Make sure your API keys are configured and you\'ve made some API calls.'));
-      console.log(chalk.blue('\n💡 Note: This is a demo version showing sample data.'));
-      console.log(chalk.blue('Real API integration will be available in v0.2.0.'));
+      
+      // Check if real data service was used
+      const hasRealData = await checkIfRealDataAvailable();
+      if (!hasRealData) {
+        console.log(chalk.blue('\n💡 Note: Currently using demo data.'));
+        console.log(chalk.blue('Run "api-cost test" to check your API connections.'));
+      } else {
+        console.log(chalk.blue('\n💡 No API usage recorded yet.'));
+        console.log(chalk.blue('Make some API calls and try again.'));
+      }
       return;
     }
 
@@ -182,5 +189,16 @@ export async function statusCommand(options: CommandOptions) {
     }
     
     process.exit(1);
+  }
+}
+
+async function checkIfRealDataAvailable(): Promise<boolean> {
+  try {
+    const { RealUsageService } = await import('../services/RealUsageService');
+    const realService = new RealUsageService();
+    const connectivity = await realService.testConnectivity();
+    return Object.values(connectivity).some(result => result.connected);
+  } catch {
+    return false;
   }
 }

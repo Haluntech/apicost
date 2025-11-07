@@ -4,15 +4,26 @@ import { PRICING_DATA } from '../types';
 
 export class UsageService {
   private configService: ConfigService;
+  private useRealData: boolean = true; // Toggle for real vs mock data
 
-  constructor() {
+  constructor(useRealData: boolean = true) {
     this.configService = new ConfigService();
+    this.useRealData = useRealData;
   }
 
   async getCurrentUsage(provider?: string, days: number = 7): Promise<CostSummary> {
-    // For now, return mock data
-    // In a real implementation, this would fetch data from API providers
-    return this.getMockUsageData(provider, days);
+    if (this.useRealData) {
+      try {
+        const { RealUsageService } = await import('./RealUsageService');
+        const realService = new RealUsageService();
+        return await realService.getCurrentUsage(provider, days);
+      } catch (error) {
+        console.warn('Failed to use real API data, falling back to demo mode:', error);
+        return this.getMockUsageData(provider, days);
+      }
+    } else {
+      return this.getMockUsageData(provider, days);
+    }
   }
 
   private getMockUsageData(provider?: string, days: number = 7): CostSummary {
