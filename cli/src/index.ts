@@ -11,6 +11,7 @@ import { budgetCommand } from './commands/budget';
 import { alertCommand } from './commands/alert';
 import { reportCommand } from './commands/report';
 import { testCommand } from './commands/test';
+import { monitorCommand } from './commands/monitor';
 import { ConfigService } from './services/ConfigService';
 
 const program = new Command();
@@ -120,6 +121,13 @@ program
   .description('Test API key connections')
   .option('-p, --provider <provider>', 'test specific provider only')
   .action(testCommand);
+
+program
+  .command('monitor')
+  .description('Start real-time cost monitoring')
+  .option('-i, --interval <minutes>', 'monitoring interval in minutes (default: 5)')
+  .option('-d, --duration <minutes>', 'monitor for specific duration (optional)')
+  .action(monitorCommand);
 
 // Global error handler
 process.on('uncaughtException', (error) => {
